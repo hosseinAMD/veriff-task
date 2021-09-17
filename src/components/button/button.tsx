@@ -1,17 +1,17 @@
-import React from "react";
-import "./button.css";
+import React from 'react';
+import './button.css';
 
 export interface ButtonProps {
   children: string;
   disabled?: boolean;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   disabled = false,
-  type = "button",
+  type = 'button',
   onClick = () => {},
 }) => {
   return (

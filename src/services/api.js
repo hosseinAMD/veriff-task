@@ -5,29 +5,29 @@ export function fetchChecks() {
         Math.random() <= 0.8
           ? resolve([
               {
-                id: "aaa",
+                id: 'aaa',
                 priority: 10,
-                description: "Face on the picture matches face on the document"
+                description: 'Face on the picture matches face on the document',
               },
               {
-                id: "bbb",
+                id: 'bbb',
                 priority: 5,
-                description: "Veriff supports presented document"
+                description: 'Veriff supports presented document',
               },
               {
-                id: "ccc",
+                id: 'ccc',
                 priority: 7,
-                description: "Face is clearly visible"
+                description: 'Face is clearly visible',
               },
               {
-                id: "ddd",
+                id: 'ddd',
                 priority: 3,
-                description: "Document data is clearly visible"
-              }
+                description: 'Document data is clearly visible',
+              },
             ])
           : reject({ success: false }),
-      500
-    )
+      500,
+    ),
   );
 }
 
@@ -41,7 +41,7 @@ export function submitCheckResults(results) {
     setTimeout(
       () =>
         Math.random() <= 0.8 ? resolve(results) : reject({ success: false }),
-      500
-    )
+      500,
+    ),
   );
 }

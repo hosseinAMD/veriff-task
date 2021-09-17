@@ -1,6 +1,6 @@
 export enum AnswerResult {
-  YES = "yes",
-  NO = "no",
+  YES = 'yes',
+  NO = 'no',
 }
 
 export interface Answer {
