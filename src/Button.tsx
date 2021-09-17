@@ -1,20 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./Button.css";
 
-const Button = ({ children, ...rest }) => {
+export interface ButtonProps {
+  children: string;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  disabled = false,
+  type = "button",
+  onClick = () => {},
+}) => {
   return (
-    <button className="Button" {...rest}>
+    <button
+      className="Button"
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
-};
-
-Button.propTypes = {
-  children: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-  type: PropTypes.string,
-  onClick: PropTypes.func
 };
 
 export default Button;
