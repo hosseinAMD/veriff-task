@@ -70,6 +70,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
       <p className="switch__description">{description}</p>
       <div className="switch__control">
         <button
+          type="button"
           disabled={disabled}
           className={`switch__control__btn ${
             value === AnswerResult.YES ? 'active' : ''
@@ -79,6 +80,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
           {t('yes')}
         </button>
         <button
+          type="button"
           disabled={disabled}
           className={`switch__control__btn ${
             value === AnswerResult.NO ? 'active' : ''
