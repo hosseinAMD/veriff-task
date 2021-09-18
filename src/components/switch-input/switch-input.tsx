@@ -21,10 +21,17 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Focus on the first check automatically
     if (!ref.current?.previousElementSibling) {
       ref.current?.focus();
     }
   }, []);
+
+  // In order to prevent disabled,etc logics, switch input has its own handleChange
+  const handleChange = (id: string, value: AnswerResult) => {
+    if (disabled) return;
+    onChange(id, value);
+  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
@@ -39,18 +46,18 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
         }
         break;
       case '1':
-        onChange(id, AnswerResult.YES);
+        handleChange(id, AnswerResult.YES);
         break;
       case '2':
-        onChange(id, AnswerResult.NO);
+        handleChange(id, AnswerResult.NO);
         break;
       default:
         break;
     }
   };
 
-  const onClick = (value: AnswerResult) => {
-    onChange(id, value);
+  const handleClick = (value: AnswerResult) => {
+    handleChange(id, value);
   };
 
   return (
@@ -67,7 +74,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
           className={`switch__control__btn ${
             value === AnswerResult.YES ? 'active' : ''
           }`}
-          onClick={() => onClick(AnswerResult.YES)}
+          onClick={() => handleClick(AnswerResult.YES)}
         >
           {t('yes')}
         </button>
@@ -76,7 +83,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
           className={`switch__control__btn ${
             value === AnswerResult.NO ? 'active' : ''
           }`}
-          onClick={() => onClick(AnswerResult.NO)}
+          onClick={() => handleClick(AnswerResult.NO)}
         >
           {t('no')}
         </button>
