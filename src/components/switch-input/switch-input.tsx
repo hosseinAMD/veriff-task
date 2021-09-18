@@ -7,6 +7,7 @@ export interface SwitchInputProps {
   id: string;
   description: string;
   value?: AnswerResult;
+  disabled?: boolean;
   onChange: (id: string, value: AnswerResult) => void;
 }
 
@@ -14,6 +15,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   id,
   description,
   value,
+  disabled,
   onChange,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,7 +34,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
         }
         break;
       case 'ArrowDown':
-        if (ref.current?.nextElementSibling) {
+        if (ref.current?.nextElementSibling && value !== AnswerResult.NO) {
           (ref.current.nextElementSibling as HTMLDivElement).focus();
         }
         break;
@@ -53,7 +55,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
 
   return (
     <div
-      className="switch"
+      className={`switch ${disabled ? 'switch-disabled' : 'switch-enabled'}`}
       tabIndex={0}
       ref={ref}
       onKeyDown={(e) => handleKeyDown(e)}
@@ -61,6 +63,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
       <p className="switch__description">{description}</p>
       <div className="switch__control">
         <button
+          disabled={disabled}
           className={`switch__control__btn ${
             value === AnswerResult.YES ? 'active' : ''
           }`}
@@ -69,6 +72,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
           {t('yes')}
         </button>
         <button
+          disabled={disabled}
           className={`switch__control__btn ${
             value === AnswerResult.NO ? 'active' : ''
           }`}

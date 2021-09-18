@@ -7,14 +7,19 @@
   margin-top: 0;
 }
 
-.switch:hover {
+.switch-enabled:hover {
   background-color: var(--gray-color);
 }
 
-.switch:focus,
-.switch:focus-within {
+.switch-enabled:focus,
+.switch-enabled:focus-within {
   background-color: var(--highlight-color);
   outline: none;
+}
+
+.switch-disabled {
+  color: gray;
+  cursor: not-allowed;
 }
 
 .switch__control__btn {
@@ -28,6 +33,12 @@
   border-left: none;
   cursor: pointer;
   transition: 300ms;
+}
+
+.switch__control__btn:disabled {
+  color: gray;
+  border-color: var(--gray-color) !important;
+  cursor: not-allowed;
 }
 
 .switch__control button:first-of-type {

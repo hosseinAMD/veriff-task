@@ -18,7 +18,12 @@ const Home: React.FC = () => {
   const { loading, error, fetchApi } = useFetch(fetchChecks, resHanlder, true);
 
   const onChange = (id: string, value: AnswerResult) => {
-    setAnswers({ ...answers, [id]: value });
+    const clonedAnswers = { ...answers, [id]: value };
+    const checkIndex = checks.findIndex((item) => item.id === id);
+    for (let index = checkIndex + 1; index < checks.length; index++) {
+      clonedAnswers[checks[index].id] = undefined;
+    }
+    setAnswers(clonedAnswers);
   };
 
   return (
@@ -29,15 +34,20 @@ const Home: React.FC = () => {
         onTryAgain={fetchApi}
         render={() => (
           <div>
-            {checks.map(({ id, description }) => (
-              <SwitchInput
-                key={id}
-                id={id}
-                description={description}
-                value={answers[id]}
-                onChange={onChange}
-              />
-            ))}
+            {checks.map(({ id, description }, index) => {
+              const prevCheck =
+                index !== 0 ? answers[checks[index - 1].id] : AnswerResult.YES;
+              return (
+                <SwitchInput
+                  key={id}
+                  id={id}
+                  description={description}
+                  value={answers[id]}
+                  disabled={prevCheck !== AnswerResult.YES}
+                  onChange={onChange}
+                />
+              );
+            })}
           </div>
         )}
       />
