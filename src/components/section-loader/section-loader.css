@@ -1,0 +1,11 @@
+.loading {
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.error {
+  text-align: center;
+  color: var(--danger-color);
+  font-weight: 600;
+}
