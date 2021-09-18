@@ -5,13 +5,17 @@ import { useFetch } from 'hooks/use-fetch';
 import { Answer, AnswerResult } from 'models/Answer';
 import { Check } from 'models/Check';
 import React, { FormEvent, useCallback, useMemo, useState } from 'react';
-import { fetchChecks } from 'services/api';
+import { fetchChecks, submitCheckResults } from 'services/api';
 import t from 'i18n';
 import './home.css';
+import { answerParser } from 'utils/answerParser';
 
 const Home: React.FC = () => {
   const [checks, setChecks] = useState<Check[]>([]);
   const [answers, setAnswers] = useState<Answer>({});
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string | undefined>();
+  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
 
   const resHanlder = useCallback((res: Check[]) => {
     const sortedChecks = res.sort((a, b) => a.priority - b.priority);
@@ -21,6 +25,7 @@ const Home: React.FC = () => {
   const { loading, error, fetchApi } = useFetch(fetchChecks, resHanlder, true);
 
   const onChange = (id: string, value: AnswerResult) => {
+    setSubmitError('');
     const clonedAnswers = { ...answers, [id]: value };
     const checkIndex = checks.findIndex((item) => item.id === id);
     for (let index = checkIndex + 1; index < checks.length; index++) {
@@ -42,8 +47,33 @@ const Home: React.FC = () => {
 
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('answers', answers);
+    const parsedAnswers = answerParser(answers);
+    setSubmitLoading(true);
+    setSubmitError(undefined);
+    submitCheckResults(parsedAnswers)
+      .then(() => {
+        setIsFormSubmitted(true);
+        setSubmitLoading(false);
+      })
+      .catch(() => {
+        setSubmitError(t('defaultError'));
+        setSubmitLoading(false);
+      });
   };
+
+  const handleReset = () => {
+    setAnswers({});
+    setIsFormSubmitted(false);
+  };
+
+  if (isFormSubmitted) {
+    return (
+      <div className="submitted">
+        <p>{t('formSubmitted')}</p>
+        <Button onClick={handleReset}>{t('reset')}</Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -68,13 +98,18 @@ const Home: React.FC = () => {
               );
             })}
             <div className="form-control">
-              <Button type="submit" disabled={isSubmitDisabled}>
+              <Button
+                type="submit"
+                disabled={isSubmitDisabled}
+                loading={submitLoading}
+              >
                 {t('submit')}
               </Button>
             </div>
           </>
         )}
       />
+      {submitError && <p className="error">{submitError}</p>}
     </form>
   );
 };

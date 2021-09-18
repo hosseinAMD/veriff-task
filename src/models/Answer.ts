@@ -4,3 +4,8 @@ export enum AnswerResult {
 }
 
 export type Answer = Record<string, AnswerResult | undefined>;
+
+export type ServerAnswer = {
+  checkId: string;
+  result: AnswerResult;
+}[];

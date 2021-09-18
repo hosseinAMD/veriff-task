@@ -5,4 +5,5 @@ export const enStrings: Record<string, string> = {
   tryAgain: 'Try Again',
   yes: 'Yes',
   no: 'No',
+  formSubmitted: 'You form has been submitted. Thanks!',
 };

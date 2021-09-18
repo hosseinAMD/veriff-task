@@ -4,3 +4,9 @@
   justify-content: flex-end;
   padding-top: 1rem;
 }
+
+.submitted {
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 700;
+}

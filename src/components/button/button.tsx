@@ -1,9 +1,11 @@
 import React from 'react';
 import './button.css';
+import t from 'i18n';
 
 export interface ButtonProps {
   children: string;
   disabled?: boolean;
+  loading?: boolean;
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }
@@ -11,17 +13,18 @@ export interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   children,
   disabled = false,
+  loading = false,
   type = 'button',
   onClick = () => {},
 }) => {
   return (
     <button
       className="Button"
-      disabled={disabled}
+      disabled={disabled || loading}
       type={type}
       onClick={onClick}
     >
-      {children}
+      {loading ? t('loading') : children}
     </button>
   );
 };
