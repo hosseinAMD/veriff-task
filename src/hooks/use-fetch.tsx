@@ -23,8 +23,14 @@ export const useFetch = (
     setLoading(true);
     setError('');
     service()
-      .then((res) => responseHandler(res))
-      .catch(() => throwError());
+      .then((res) => {
+        responseHandler(res);
+        setLoading(false);
+      })
+      .catch(() => {
+        throwError();
+        setLoading(false);
+      });
   }, [responseHandler, service]);
 
   useEffect(() => {
