@@ -10,8 +10,9 @@ const Home: React.FC = () => {
   const [checks, setChecks] = useState<Check[]>([]);
   const [answers, setAnswers] = useState<Answer>({});
 
-  const resHanlder = useCallback((res) => {
-    setChecks(res);
+  const resHanlder = useCallback((res: Check[]) => {
+    const sortedChecks = res.sort((a, b) => a.priority - b.priority);
+    setChecks(sortedChecks);
   }, []);
 
   const { loading, error, fetchApi } = useFetch(fetchChecks, resHanlder, true);
