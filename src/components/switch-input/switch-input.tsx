@@ -41,7 +41,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
         }
         break;
       case 'ArrowDown':
-        if (ref.current?.nextElementSibling && value !== AnswerResult.NO) {
+        if (ref.current?.nextElementSibling && value === AnswerResult.YES) {
           (ref.current.nextElementSibling as HTMLDivElement).focus();
         }
         break;
@@ -65,7 +65,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
       className={`switch ${disabled ? 'switch-disabled' : 'switch-enabled'}`}
       tabIndex={0}
       ref={ref}
-      onKeyDown={(e) => handleKeyDown(e)}
+      onKeyDown={handleKeyDown}
     >
       <p className="switch__description">{description}</p>
       <div className="switch__control">
