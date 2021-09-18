@@ -1,6 +1,9 @@
 .App {
   font-family: sans-serif;
+  width: 50%;
+  margin: 3rem auto;
 
   --primary-color: #004e5f;
   --highlight-color: #def7f7;
+  --danger-color: #801e1e;
 }
