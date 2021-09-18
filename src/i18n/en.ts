@@ -3,4 +3,6 @@ export const enStrings: Record<string, string> = {
   defaultError: 'Oops!! Something went wrong...',
   loading: 'Loading...',
   tryAgain: 'Try Again',
+  yes: 'Yes',
+  no: 'No',
 };

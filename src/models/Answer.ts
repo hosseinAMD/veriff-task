@@ -3,7 +3,4 @@ export enum AnswerResult {
   NO = 'no',
 }
 
-export interface Answer {
-  checkId: string;
-  result: AnswerResult;
-}
+export type Answer = Record<string, AnswerResult | undefined>;

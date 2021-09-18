@@ -1,0 +1,47 @@
+.switch {
+  padding: 1rem;
+  transition: 300ms;
+}
+
+.switch p {
+  margin-top: 0;
+}
+
+.switch:hover {
+  background-color: var(--gray-color);
+}
+
+.switch:focus,
+.switch:focus-within {
+  background-color: var(--highlight-color);
+  outline: none;
+}
+
+.switch__control__btn {
+  background: white;
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 500;
+  width: 4rem;
+  padding: 0.2rem;
+  border: 2px solid var(--primary-color);
+  border-left: none;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.switch__control button:first-of-type {
+  border-left: 2px solid var(--primary-color);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.switch__control button:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.active {
+  background: var(--primary-color);
+  color: white;
+}
