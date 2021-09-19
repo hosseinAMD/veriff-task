@@ -1,17 +1,11 @@
-import { Answer, AnswerResult, ServerAnswer } from 'models/Answer';
 import { answerParser } from 'utils/answerParser';
+import {
+  MOCK_OBJ_FILLED,
+  MOCK_OBJ_IMPERFECT,
+  PARSED_OBJ,
+} from 'utils/test-mocks/answer';
 
 describe('answerParser', () => {
-  const MOCK_OBJ_FILLED: Answer = {
-    aaa: AnswerResult.YES,
-    bbb: AnswerResult.NO,
-  };
-  const MOCK_OBJ_IMPERFECT: Answer = { ...MOCK_OBJ_FILLED, ccc: undefined };
-  const PARSED_OBJ: ServerAnswer = [
-    { checkId: 'aaa', result: AnswerResult.YES },
-    { checkId: 'bbb', result: AnswerResult.NO },
-  ];
-
   test('should return empty array for empty object input', () => {
     expect(answerParser({})).toEqual([]);
   });

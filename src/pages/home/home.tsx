@@ -10,6 +10,7 @@ import { fetchChecks, submitCheckResults } from 'services/api';
 import { answerParser } from 'utils/answerParser';
 import t from 'i18n';
 import './home.css';
+import { answerCounter } from 'utils/answerCounter';
 
 const Home: React.FC = () => {
   const [checks, setChecks] = useState<Check[]>([]);
@@ -44,13 +45,7 @@ const Home: React.FC = () => {
   };
 
   const isSubmitDisabled = useMemo(() => {
-    let yesCounts = 0;
-    let noCounts = 0;
-    const values = Object.values(answers).filter((item) => item !== undefined);
-    values.forEach((val) => {
-      if (val === AnswerResult.NO) noCounts += 1;
-      if (val === AnswerResult.YES) yesCounts += 1;
-    });
+    const { yesCounts, noCounts } = answerCounter(answers);
     return !(yesCounts === checks.length || noCounts > 0);
   }, [answers, checks]);
 
