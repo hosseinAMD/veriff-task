@@ -1,0 +1,5 @@
+.logo-box {
+  display: flex;
+  justify-content: flex-start;
+  padding: 2rem 0;
+}

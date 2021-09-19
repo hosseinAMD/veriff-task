@@ -1,4 +1,5 @@
 export const enStrings: Record<string, string> = {
+  brand: 'Veriff',
   submit: 'Submit',
   defaultError: 'Oops!! Something went wrong...',
   loading: 'Loading...',

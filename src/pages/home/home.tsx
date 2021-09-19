@@ -8,9 +8,9 @@ import { Answer, AnswerResult } from 'models/Answer';
 import { Check } from 'models/Check';
 import { fetchChecks, submitCheckResults } from 'services/api';
 import { answerParser } from 'utils/answerParser';
+import { answerCounter } from 'utils/answerCounter';
 import t from 'i18n';
 import './home.css';
-import { answerCounter } from 'utils/answerCounter';
 
 const Home: React.FC = () => {
   const [checks, setChecks] = useState<Check[]>([]);
