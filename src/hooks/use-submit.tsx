@@ -26,7 +26,6 @@ export const useSubmit = (
 
   const submit = useCallback(
     (data: any) => {
-      console.log('here');
       setLoading(true);
       setError('');
       service(data)
