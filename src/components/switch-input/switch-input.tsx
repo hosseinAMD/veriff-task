@@ -52,7 +52,6 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
         handleChange(id, AnswerResult.NO);
         break;
       default:
-        break;
     }
   };
 
