@@ -7,7 +7,7 @@ export interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   type?: 'button' | 'submit' | 'reset';
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
