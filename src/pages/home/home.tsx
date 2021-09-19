@@ -9,12 +9,11 @@ import { fetchChecks, submitCheckResults } from 'services/api';
 import t from 'i18n';
 import './home.css';
 import { answerParser } from 'utils/answerParser';
+import { useSubmit } from 'hooks/use-submit';
 
 const Home: React.FC = () => {
   const [checks, setChecks] = useState<Check[]>([]);
   const [answers, setAnswers] = useState<Answer>({});
-  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<string | undefined>();
   const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
 
   const resHanlder = useCallback((res: Check[]) => {
@@ -22,10 +21,20 @@ const Home: React.FC = () => {
     setChecks(sortedChecks);
   }, []);
 
+  const afterSubmitHandler = () => {
+    setIsFormSubmitted(true);
+  };
+
   const { loading, error, fetchApi } = useFetch(fetchChecks, resHanlder, true);
+  const {
+    loading: submitLoading,
+    error: submitError,
+    submit,
+    reset,
+  } = useSubmit(submitCheckResults, afterSubmitHandler);
 
   const onChange = (id: string, value: AnswerResult) => {
-    setSubmitError('');
+    reset();
     const clonedAnswers = { ...answers, [id]: value };
     const checkIndex = checks.findIndex((item) => item.id === id);
     for (let index = checkIndex + 1; index < checks.length; index++) {
@@ -48,20 +57,10 @@ const Home: React.FC = () => {
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     const parsedAnswers = answerParser(answers);
-    setSubmitLoading(true);
-    setSubmitError(undefined);
-    submitCheckResults(parsedAnswers)
-      .then(() => {
-        setIsFormSubmitted(true);
-        setSubmitLoading(false);
-      })
-      .catch(() => {
-        setSubmitError(t('defaultError'));
-        setSubmitLoading(false);
-      });
+    submit(parsedAnswers);
   };
 
-  const handleReset = () => {
+  const handleResetForm = () => {
     setAnswers({});
     setIsFormSubmitted(false);
   };
@@ -70,7 +69,7 @@ const Home: React.FC = () => {
     return (
       <div className="submitted">
         <p>{t('formSubmitted')}</p>
-        <Button onClick={handleReset}>{t('reset')}</Button>
+        <Button onClick={handleResetForm}>{t('reset')}</Button>
       </div>
     );
   }
