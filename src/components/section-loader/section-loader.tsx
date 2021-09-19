@@ -1,6 +1,6 @@
 import React from 'react';
+import Button from 'components/button';
 import t from 'i18n';
-import Button from 'components/button/button';
 import './section-loader.css';
 
 export interface SectionLoaderProps {

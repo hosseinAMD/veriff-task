@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, KeyboardEvent } from 'react';
+import { AnswerResult } from 'models/Answer';
 import t from 'i18n';
 import './switch-input.css';
-import { AnswerResult } from 'models/Answer';
 
 export interface SwitchInputProps {
   id: string;

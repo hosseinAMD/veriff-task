@@ -1,15 +1,15 @@
-import Button from 'components/button/button';
-import SectionLoader from 'components/section-loader/section-loader';
-import SwitchInput from 'components/switch-input/switch-input';
+import React, { FormEvent, useCallback, useMemo, useState } from 'react';
+import Button from 'components/button/';
+import SectionLoader from 'components/section-loader';
+import SwitchInput from 'components/switch-input';
 import { useFetch } from 'hooks/use-fetch';
+import { useSubmit } from 'hooks/use-submit';
 import { Answer, AnswerResult } from 'models/Answer';
 import { Check } from 'models/Check';
-import React, { FormEvent, useCallback, useMemo, useState } from 'react';
 import { fetchChecks, submitCheckResults } from 'services/api';
+import { answerParser } from 'utils/answerParser';
 import t from 'i18n';
 import './home.css';
-import { answerParser } from 'utils/answerParser';
-import { useSubmit } from 'hooks/use-submit';
 
 const Home: React.FC = () => {
   const [checks, setChecks] = useState<Check[]>([]);

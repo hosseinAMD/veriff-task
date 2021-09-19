@@ -1,6 +1,6 @@
 import React from 'react';
-import './button.css';
 import t from 'i18n';
+import './button.css';
 
 export interface ButtonProps {
   children: string;
