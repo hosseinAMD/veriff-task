@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import t from 'i18n';
 
 export interface useSubmitReturn {

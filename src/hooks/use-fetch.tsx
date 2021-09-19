@@ -13,7 +13,7 @@ export const useFetch = (
   preLoading: boolean,
 ): useFetchReturn => {
   const [loading, setLoading] = useState<boolean>(preLoading);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string>('');
 
   const throwError = () => {
     setError(t('defaultError'));
